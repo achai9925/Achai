@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A concept for an AI-assisted research scout that reviews international anesthesia developments and proposes research questions for human review.">
+  <meta name="theme-color" content="#eeeeee">
+  <title>Global Anesthesia Research Scout — Alan Chai</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="top">
+    <nav class="site-nav" aria-label="Main navigation">
+      <a class="site-name" href="index.html">Alan Chai <span>Anesthesiology</span></a>
+      <a href="index.html">Home</a>
+      <details class="projects-menu">
+        <summary>Projects</summary>
+        <ul>
+          <li><a href="ntd-project.html">STRs &amp; neural tube defects</a></li>
+          <li><a href="anesthesia-research-radar.html" aria-current="page">Global anesthesia research scout</a></li>
+        </ul>
+      </details>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main class="page" id="main">
+    <h1>A global anesthesia research idea scout</h1>
+    <p><strong>Project concept · Not yet an implemented AI system</strong></p>
+    <p>Clinical techniques, devices, care pathways, and research questions develop around the world. This concept explores whether an AI-assisted tool could monitor recent anesthesia developments—particularly work published or adopted outside the United States—and help turn promising signals into well-grounded research questions.</p>
+
+    <hr>
+    <h2>The idea</h2>
+    <p>Build a regularly updated, source-linked digest of relevant anesthesia research and practice developments. For each promising development, the system would summarize what changed, where and in what setting it emerged, what evidence supports it, and what questions might be worth studying in another context.</p>
+    <p>The goal would not be to import a practice from one country into another or to make clinical recommendations. It would be to help a researcher notice developments, understand their context, and formulate questions for human review.</p>
+
+    <h2>How a responsible version could work</h2>
+    <ol>
+      <li><strong>Monitor appropriate sources.</strong> Use permitted APIs, RSS feeds, journal alerts, society publications, clinical-trial registries, and other openly accessible sources. Include international sources and languages where reliable metadata or translation is available.</li>
+      <li><strong>Screen for relevance and recency.</strong> Identify material related to anesthesia, perioperative care, airway management, monitoring, pain, critical care, and health systems. Deduplicate records and preserve publication dates and source metadata.</li>
+      <li><strong>Summarize with citations.</strong> Extract the study setting, population, intervention or development, comparison, outcomes, limitations, and source links. Every claim should be traceable to the original publication or announcement.</li>
+      <li><strong>Keep local context visible.</strong> Record where the work took place, available resources, patient population, regulatory setting, and care pathway. A practice that works in one setting may not transfer directly to another.</li>
+      <li><strong>Generate research questions, not conclusions.</strong> Suggest testable questions such as feasibility, implementation, comparative effectiveness, safety, or equity in a clearly defined population and setting.</li>
+      <li><strong>Require researcher review.</strong> A clinician or researcher verifies the source, checks the literature for prior work, assesses feasibility and ethics, and edits or rejects each suggestion before it is shared.</li>
+    </ol>
+
+    <h2>What a useful research idea might contain</h2>
+    <ul>
+      <li><strong>Signal:</strong> what development was observed, with its original source and date.</li>
+      <li><strong>Context:</strong> country, clinical setting, patient population, and relevant resource assumptions.</li>
+      <li><strong>Evidence:</strong> study type, key outcomes, uncertainty, and limitations—not just an AI-generated summary.</li>
+      <li><strong>Question:</strong> a specific population, intervention or exposure, comparison, and outcome where applicable.</li>
+      <li><strong>Next step:</strong> a preliminary literature search, feasibility check, and expert discussion before designing a study.</li>
+    </ul>
+
+    <h2>Example output format</h2>
+    <p><em>This is an illustrative template, not a generated finding:</em></p>
+    <blockquote>
+      <p><strong>Development:</strong> [A recent anesthesia practice, technology, or study, linked to its source.]</p>
+      <p><strong>Setting:</strong> [Country, care environment, population, and resource context.]</p>
+      <p><strong>Possible question:</strong> [Could this approach be feasible, safe, or effective in a specified population or setting?]</p>
+      <p><strong>Before pursuing:</strong> Verify the source, search for related studies, consult local clinicians, and assess ethics and feasibility.</p>
+    </blockquote>
+
+    <h2>Design principles and safeguards</h2>
+    <ul>
+      <li>Use authorized, transparent data sources and respect publisher terms, robots policies, privacy, and access restrictions.</li>
+      <li>Keep source links, dates, and quoted evidence alongside summaries so readers can check the original material.</li>
+      <li>Label uncertainty and distinguish peer-reviewed evidence from preprints, announcements, and opinion.</li>
+      <li>Do not treat translated text or AI summaries as authoritative; verify technical and clinical meaning with people familiar with the source context.</li>
+      <li>Do not generate patient-specific advice or replace clinical judgment, literature review, ethics review, or expert collaboration.</li>
+    </ul>
+
+    <h2>Possible first prototype</h2>
+    <p>A small, researcher-supervised pilot could start with a handful of openly accessible international anesthesia sources and a weekly curated digest. Each entry would include a human-checked summary, original link, evidence type, country and setting, and one or two draft research questions. Evaluation could focus on source accuracy, usefulness to reviewers, missed relevant developments, and time saved—not the number of ideas generated.</p>
+
+    <p><a href="index.html">← Back to home</a></p>
+  </main>
+
+  <footer class="page">
+    <hr>
+    <p>A research-tool concept for exploration and discussion; not a clinical decision system.</p>
+  </footer>
+  <a class="back-to-top" href="#top" aria-label="Back to top" title="Back to top">↑</a>
+</body>
+</html>

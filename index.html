@@ -3,155 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A practical, step-by-step lesson on investigating short tandem repeat expansions in neural tube defect whole-genome sequencing cohorts.">
-  <title>A Practical Lesson in STR Analysis for Neural Tube Defects</title>
-  <style>
-    body {
-      max-width: 70ch;
-      margin: 2rem auto;
-      padding: 0 1rem;
-      line-height: 1.5;
-      font: 18px/1.5 sans-serif;
-      color: #333;
-      background: #eee;
-    }
-  </style>
+  <meta name="description" content="Alan Chai — anesthesiology, medicine, and research.">
+  <meta name="theme-color" content="#eeeeee">
+  <title>Alan Chai — Anesthesiology</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header id="top">
-    <h1>A Practical Lesson in STR Analysis for Neural Tube Defects</h1>
-    <p>A plain-language walkthrough of a whole-genome sequencing research project</p>
-    <nav aria-label="Lesson contents">
-      <a href="#question">Question</a> |
-      <a href="#design">Study design</a> |
-      <a href="#workflow">Analysis workflow</a> |
-      <a href="#interpretation">Interpretation</a> |
-      <a href="#limitations">Limitations</a>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="top">
+    <nav class="site-nav" aria-label="Main navigation">
+      <a class="site-name" href="index.html" aria-current="page">Alan Chai <span>Anesthesiology</span></a>
+      <a href="index.html" aria-current="page">Home</a>
+      <details class="projects-menu">
+        <summary>Projects</summary>
+        <ul>
+          <li><a href="ntd-project.html">STRs &amp; neural tube defects</a></li>
+          <li><a href="anesthesia-research-radar.html">Global anesthesia research scout</a></li>
+        </ul>
+      </details>
+      <a href="about.html">About</a>
     </nav>
   </header>
 
-  <main id="main">
-    <hr>
-    <section id="question">
-      <h2>What are we trying to find out?</h2>
-      <p>Neural tube defects (NTDs) are complex congenital conditions. Their genetic contributors may include more than single-nucleotide variants (SNVs). This project asks whether short tandem repeat (STR) expansions—repeated DNA motifs that occur more times than expected—might be associated with NTDs.</p>
-      <p>The aim is to find and prioritize candidate expansions for follow-up. A statistical association or a high model score is a reason to investigate a variant, not proof that the repeat causes an NTD.</p>
-      <p><strong>Study example:</strong> “Exploring the Role of Tandem Repeat Expansions in the Genetic Etiology of Neural Tube Defects,” a capstone project presented at the American Society of Human Genetics (ASHG) Annual Meeting and recognized with a Reviewers’ Choice Award.</p>
-    </section>
+  <main class="page home-page" id="main">
+    <h1>Alan Chai</h1>
+    <p class="home-subtitle">Anesthesiology · Medicine · Research</p>
+    <p>Medical student interested in anesthesiology, computational genomics, and how careful research can improve patient care.</p>
 
     <hr>
-    <section id="design">
-      <h2>Step 1: Define the study before running tools</h2>
-      <p>Write down the research question, who counts as a case or control, the phenotype definition, the inclusion criteria, and the analysis plan. Confirm ethics approval, consent, data-use permissions, and secure storage before accessing genomic or clinical data.</p>
-      <h3>Set up the case-control cohorts</h3>
-      <p>The project poster reports two cohorts:</p>
-      <ul>
-        <li><strong>Cohort 1:</strong> 49 cases and 53 controls</li>
-        <li><strong>Cohort 2:</strong> 67 cases and 96 controls</li>
-      </ul>
-      <p>Keep cohort labels, sample identifiers, phenotype records, and sequencing files linked through a controlled sample sheet. Check for duplicate samples, related individuals, inconsistent labels, and differences in sequencing or recruitment that might track with case status.</p>
-      <h3>Decide what counts as evidence</h3>
-      <p>Predefine how you will compare repeat sizes or expansion calls, which covariates are available, how you will handle missing or low-quality calls, and how you will account for testing many loci. If you change the plan after seeing results, record the change and why it was made.</p>
-    </section>
-
-    <hr>
-    <section id="workflow">
-      <h2>Step 2: Prepare and quality-check the sequencing data</h2>
-      <p>Start from the short-read whole-genome sequencing (WGS) data and sample metadata. The tools in this workflow commonly analyze aligned reads, such as BAM or CRAM files. Confirm that the reference genome build, contig names, sample IDs, and index files agree across inputs.</p>
-      <ul>
-        <li>Check that every sample has the expected files and metadata.</li>
-        <li>Review sequencing coverage and alignment quality; repeats can be difficult to resolve with short reads.</li>
-        <li>Use a consistent reference build and compatible software settings across cases and controls.</li>
-        <li>Track exclusions and reasons for exclusion rather than silently dropping samples.</li>
-      </ul>
-      <p><strong>Output:</strong> a documented set of eligible samples and aligned-read files suitable for analysis.</p>
-
-      <h2>Step 3: Profile known repeat loci with ExpansionHunter</h2>
-      <p>ExpansionHunter tests loci described in a repeat catalog. For each sample and locus, it estimates repeat length and reports evidence such as motif structure, interruptions, genotype or zygosity, and confidence information.</p>
-      <ol>
-        <li>Use a catalog appropriate to the research question and compatible with the reference build.</li>
-        <li>Run the same version and settings consistently across all samples.</li>
-        <li>Collect the per-sample outputs and combine them into a locus-by-sample table.</li>
-        <li>Flag low-confidence calls and compare callability across cases and controls.</li>
-      </ol>
-      <p><strong>What this answers:</strong> At known STR loci, do cases show repeat-size or genotype patterns that differ from controls?</p>
-
-      <h2>Step 4: Search more broadly with ExpansionHunter Denovo</h2>
-      <p>ExpansionHunter Denovo (EHdn) looks for unusual repeat-associated read evidence across the genome, without limiting discovery to a predefined list of candidate loci. It uses alignment patterns—including anchored reads and spanning read pairs—to identify samples or motifs with outlier support for expansions.</p>
-      <ol>
-        <li>Run genome-wide discovery consistently across the cohort, following the tool’s version-specific input and filtering guidance.</li>
-        <li>Review sample-level and motif-level outliers; confirm that sequencing depth or batch does not explain them.</li>
-        <li>Compare case and control evidence to form a list of candidate loci for review.</li>
-      </ol>
-      <p><strong>What this answers:</strong> Are there candidate repeat expansions the targeted catalog-based analysis did not test?</p>
-
-      <h2>Step 5: Inspect candidate loci with REViewer</h2>
-      <p>Automated calls are hypotheses to check. Use REViewer to inspect the read alignments around high-priority loci in BAM/CRAM data. Look at the evidence supporting the call, read quality, motif interruptions, possible allele structure, and phasing where available.</p>
-      <p>Record a consistent review decision for each candidate, including ambiguous or insufficient evidence. Visual inspection helps catch artifacts, but it is not an independent confirmation of the biological finding.</p>
-
-      <h2>Step 6: Filter, compare, and prioritize candidates</h2>
-      <p>Combine locus calls, genome-wide discovery, quality checks, and visual review. Then perform the case-control comparison using a prespecified definition of an expansion and an analysis appropriate for the data. Consider ancestry, relatedness, sequencing batch, coverage, and other relevant covariates.</p>
-      <p>When testing many loci, account for multiple comparisons and report effect sizes and uncertainty—not only whether a p-value passes a threshold. Analyze cohorts separately first, then assess whether the signal is consistent before combining evidence.</p>
-      <p>The project used R and custom Bash/Python pipelines on high-performance computing clusters for batch execution, normalization, filtering, and cross-cohort statistical association testing.</p>
-
-      <h2>Step 7: Add prediction and biological context</h2>
-      <p>The project used RExPRT pathogenicity predictions with support vector machine (SVM) and XGBoost models to help rank candidate loci. It also considered gene expression, neural-development relevance, and pathway enrichment.</p>
-      <p>Prediction scores can help organize a candidate list; they do not establish pathogenicity. Keep the statistical association, read-level evidence, and biological plausibility visible as separate evidence types so a strong score does not hide weak underlying data.</p>
-
-      <h2>Step 8: Report results so another person can follow them</h2>
-      <p>For each prioritized locus, report the cohort and sample counts, repeat evidence, QC and review decisions, statistical method, effect estimate and uncertainty, multiple-testing approach, prediction method, and limitations. Preserve software versions, parameters, reference files, scripts, logs, and sample-exclusion reasons.</p>
-      <p>A useful final result is not just a ranked gene list. It is a traceable account of how each candidate moved from raw read evidence to a result that a reader can critically assess.</p>
-    </section>
-
-    <hr>
-    <section id="interpretation">
-      <h2>What did this project report?</h2>
-      <p>The poster reported candidate loci prioritized across the two cohorts, including <em>IFT88</em> repeat expansions in approximately 9% of cases. It also displayed candidate genes including <em>DIP2C</em>, <em>MEAK7</em>, <em>ZNF248</em>, <em>HECTD4</em>, <em>PPP1R13B</em>, <em>RABEP1</em>, <em>APCDD1L-DT</em>, and <em>MDGA1</em>.</p>
-      <p>These findings are hypothesis-generating. They motivate follow-up work; they should not be presented as confirmed disease-causing repeats without independent replication and further validation.</p>
-      <h3>Follow-up questions</h3>
-      <ul>
-        <li>Does the candidate repeat replicate in an independent, well-matched cohort?</li>
-        <li>Can parent-child trios clarify inheritance and heritability?</li>
-        <li>Can long-read sequencing resolve the repeat structure more directly?</li>
-        <li>Can a functional experiment test the proposed biological effect?</li>
-      </ul>
-    </section>
-
-    <hr>
-    <section id="limitations">
-      <h2>Common pitfalls to watch for</h2>
-      <ul>
-        <li><strong>Unequal data quality:</strong> apparent group differences can reflect coverage, batch, or callability rather than biology.</li>
-        <li><strong>Small cohorts:</strong> rare expansions can be difficult to estimate precisely; report uncertainty and avoid overinterpreting unstable rankings.</li>
-        <li><strong>Many comparisons:</strong> genome-wide searches create multiple-testing challenges. Plan for them and describe the approach clearly.</li>
-        <li><strong>Short-read ambiguity:</strong> repetitive regions can be difficult to align and size accurately. A caller estimate may not fully resolve a repeat.</li>
-        <li><strong>Prediction is not proof:</strong> pathogenicity models and pathway enrichment support prioritization, not causal claims.</li>
-        <li><strong>Association is not mechanism:</strong> even a replicated statistical association needs further inheritance and functional studies to establish how it relates to disease.</li>
-      </ul>
-    </section>
-
-    <hr>
-    <section id="glossary">
-      <h2>Quick glossary</h2>
-      <dl>
-        <dt><strong>STR (short tandem repeat)</strong></dt>
-        <dd>A short DNA sequence repeated consecutively; the number of copies can vary between people.</dd>
-        <dt><strong>Motif</strong></dt>
-        <dd>The sequence unit repeated at an STR locus.</dd>
-        <dt><strong>Anchored read</strong></dt>
-        <dd>A sequencing read with sequence outside the repeat that helps connect the read to a genomic location.</dd>
-        <dt><strong>Spanning read pair</strong></dt>
-        <dd>Paired reads whose alignment pattern provides evidence about sequence extending across a repeat.</dd>
-        <dt><strong>Candidate expansion</strong></dt>
-        <dd>A repeat with evidence suggesting an unusually large allele that needs additional QC and validation.</dd>
-      </dl>
-    </section>
+    <h2>Projects</h2>
+    <ul>
+      <li><a href="ntd-project.html">A practical lesson in STR analysis for neural tube defects</a></li>
+      <li><a href="anesthesia-research-radar.html">A global anesthesia research idea scout <span class="project-note">(concept)</span></a></li>
+    </ul>
+    <p><a href="about.html">A little more about me</a></p>
   </main>
 
-  <footer>
+  <footer class="page">
     <hr>
-    <p>Lesson based on the capstone poster “Exploring the Role of Tandem Repeat Expansions in the Genetic Etiology of Neural Tube Defects.”</p>
-    <p><a href="#top">Back to top</a></p>
+    <p>Alan Chai · Anesthesiology</p>
   </footer>
+  <a class="back-to-top" href="#top" aria-label="Back to top" title="Back to top">↑</a>
 </body>
 </html>
