@@ -3,100 +3,1542 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="The personal website of Achai — a home for projects, ideas, and things worth sharing.">
-  <title>Achai — Personal Website</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Alan Chai is an MD candidate at Quinnipiac University's Frank H. Netter School of Medicine, with interests in anesthesiology, computational genomics, and health equity.">
+  <meta name="theme-color" content="#f5f7f8">
+  <title>Alan Chai — MD Candidate | Anesthesiology & Genomics</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --page: #f5f7f8;
+      --surface: #ffffff;
+      --surface-soft: #eef2f4;
+      --ink: #17232d;
+      --body: #4d5b65;
+      --muted: #73818a;
+      --line: #dce3e7;
+      --accent: #176b70;
+      --accent-strong: #10575c;
+      --accent-soft: #e0eff0;
+      --warm: #b97844;
+      --shadow: 0 16px 46px rgb(25 44 54 / 7%);
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-family: var(--sans);
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      scroll-behavior: smooth;
+      scroll-padding-top: 88px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 85% 5%, rgb(208 226 230 / 45%), transparent 32rem),
+        var(--page);
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:focus-visible {
+      outline: 3px solid var(--warm);
+      outline-offset: 4px;
+      border-radius: 3px;
+    }
+
+    .skip-link {
+      position: absolute;
+      z-index: 10;
+      top: 8px;
+      left: 8px;
+      padding: 10px 14px;
+      transform: translateY(-150%);
+      border-radius: 4px;
+      background: var(--ink);
+      color: var(--surface);
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .shell {
+      width: min(1120px, calc(100% - 56px));
+      margin-inline: auto;
+    }
+
+    .site-header {
+      position: sticky;
+      z-index: 5;
+      top: 0;
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--page) 91%, transparent);
+      backdrop-filter: blur(16px);
+    }
+
+    .header-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .brand {
+      flex: 0 0 auto;
+      font-size: 15px;
+      font-weight: 750;
+      letter-spacing: -0.045em;
+    }
+
+    .brand span {
+      display: block;
+      margin-top: -3px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.055em;
+      text-transform: uppercase;
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: clamp(14px, 2.2vw, 29px);
+      color: var(--body);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .site-nav a {
+      padding-block: 8px;
+      transition: color 160ms ease;
+    }
+
+    .site-nav a:hover {
+      color: var(--accent);
+    }
+
+    .site-nav .nav-cta {
+      padding: 9px 13px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      color: var(--ink);
+    }
+
+    .site-nav .nav-cta:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    main {
+      overflow: clip;
+    }
+
+    .hero {
+      min-height: 540px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
+      align-items: center;
+      gap: 62px;
+      padding-block: 83px 86px;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 20px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--warm);
+      content: "";
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      line-height: 1.18;
+    }
+
+    h1 {
+      max-width: 720px;
+      margin-bottom: 15px;
+      font-size: clamp(48px, 7vw, 76px);
+      font-weight: 650;
+      letter-spacing: -0.075em;
+    }
+
+    .hero-role {
+      margin-bottom: 18px;
+      color: var(--accent);
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+    }
+
+    .hero-summary {
+      max-width: 650px;
+      margin-bottom: 27px;
+      color: var(--body);
+      font-size: 16px;
+      line-height: 1.85;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .button {
+      min-height: 43px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 15px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      font-size: 12px;
+      font-weight: 650;
+      transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button-primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .button-primary:hover {
+      border-color: var(--accent-strong);
+      background: var(--accent-strong);
+    }
+
+    .button-quiet:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .hero-aside {
+      position: relative;
+      min-height: 325px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      padding: 25px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(145deg, transparent 38%, rgb(23 107 112 / 8%) 38.2%, transparent 68%),
+        var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-aside::before,
+    .hero-aside::after {
+      position: absolute;
+      z-index: 0;
+      border: 1px solid color-mix(in srgb, var(--accent) 24%, transparent);
+      border-radius: 50%;
+      content: "";
+      pointer-events: none;
+    }
+
+    .hero-aside::before {
+      width: 265px;
+      height: 265px;
+      top: 25px;
+      right: -110px;
+    }
+
+    .hero-aside::after {
+      width: 200px;
+      height: 200px;
+      top: 58px;
+      right: -78px;
+    }
+
+    .aside-label,
+    .aside-content,
+    .aside-foot {
+      position: relative;
+      z-index: 1;
+    }
+
+    .aside-label,
+    .aside-foot {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .aside-content {
+      max-width: 250px;
+    }
+
+    .aside-symbol {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 20px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 19px;
+      font-weight: 700;
+    }
+
+    .aside-content h2 {
+      margin-bottom: 9px;
+      font-size: 23px;
+      letter-spacing: -0.055em;
+    }
+
+    .aside-content p {
+      margin-bottom: 0;
+      color: var(--body);
+      font-size: 12px;
+      line-height: 1.75;
+    }
+
+    .section {
+      padding-block: 80px;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-header {
+      max-width: 720px;
+      margin-bottom: 36px;
+    }
+
+    .section-header .eyebrow {
+      margin-bottom: 13px;
+    }
+
+    .section-header h2 {
+      margin-bottom: 12px;
+      font-size: clamp(31px, 4vw, 43px);
+      font-weight: 620;
+      letter-spacing: -0.06em;
+    }
+
+    .section-header > p:last-child {
+      margin-bottom: 0;
+      color: var(--body);
+      font-size: 14px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--surface);
+    }
+
+    .about-card {
+      padding: 24px;
+    }
+
+    .about-card h3,
+    .subsection-title {
+      margin-bottom: 14px;
+      font-size: 16px;
+      font-weight: 650;
+      letter-spacing: -0.03em;
+    }
+
+    .about-card > p {
+      margin-bottom: 0;
+      color: var(--body);
+      font-size: 13px;
+      line-height: 1.85;
+    }
+
+    .focus-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .focus-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: var(--body);
+      font-size: 12px;
+    }
+
+    .focus-list li::before {
+      width: 6px;
+      height: 6px;
+      flex: 0 0 auto;
+      margin-top: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      content: "";
+    }
+
+    .education-grid,
+    .experience-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .education-grid {
+      margin-top: 14px;
+    }
+
+    .credential-card {
+      min-height: 145px;
+      padding: 20px;
+    }
+
+    .card-kicker {
+      margin-bottom: 11px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.075em;
+      text-transform: uppercase;
+    }
+
+    .credential-card h3 {
+      margin-bottom: 7px;
+      font-size: 15px;
+      font-weight: 650;
+      letter-spacing: -0.025em;
+    }
+
+    .credential-card p {
+      margin-bottom: 0;
+      color: var(--body);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .research-section {
+      padding-bottom: 88px;
+    }
+
+    .research-feature {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .research-titlebar {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 27px 30px 25px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(120deg, var(--surface), var(--surface-soft));
+    }
+
+    .research-titlebar .eyebrow {
+      margin-bottom: 10px;
+    }
+
+    .research-titlebar h3 {
+      max-width: 720px;
+      margin-bottom: 8px;
+      font-size: clamp(21px, 3vw, 29px);
+      font-weight: 630;
+      letter-spacing: -0.05em;
+    }
+
+    .research-titlebar p {
+      margin-bottom: 0;
+      color: var(--body);
+      font-size: 12px;
+    }
+
+    .award {
+      flex: 0 0 auto;
+      padding: 8px 10px;
+      border: 1px solid color-mix(in srgb, var(--warm) 42%, var(--line));
+      border-radius: 4px;
+      background: color-mix(in srgb, var(--warm) 9%, var(--surface));
+      color: color-mix(in srgb, var(--warm) 75%, var(--ink));
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.035em;
+      text-align: center;
+    }
+
+    .research-body {
+      padding: 28px 30px 30px;
+    }
+
+    .research-intro {
+      max-width: 880px;
+      margin-bottom: 26px;
+      color: var(--body);
+      font-size: 13px;
+      line-height: 1.85;
+    }
+
+    .study-facts {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .fact {
+      padding: 13px 15px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: var(--page);
+    }
+
+    .fact strong {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .fact span {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.55;
+    }
+
+    .workflow-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .workflow-heading h4,
+    .methods-card h4,
+    .research-bottom h4 {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .workflow-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.04em;
+    }
+
+    .workflow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0 0 20px;
+      padding: 0;
+      list-style: none;
+      counter-reset: pipeline;
+    }
+
+    .workflow-step {
+      position: relative;
+      min-height: 206px;
+      padding: 17px 15px 15px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: var(--surface);
+      counter-increment: pipeline;
+    }
+
+    .workflow-step:not(:last-child)::after {
+      position: absolute;
+      z-index: 1;
+      top: 28px;
+      right: -13px;
+      width: 15px;
+      height: 1px;
+      background: var(--accent);
+      content: "";
+    }
+
+    .step-index {
+      display: inline-grid;
+      width: 23px;
+      height: 23px;
+      place-items: center;
+      margin-bottom: 14px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 600;
+    }
+
+    .step-index::before {
+      content: "0" counter(pipeline);
+    }
+
+    .workflow-step h5 {
+      margin: 0 0 8px;
+      font-size: 13px;
+      font-weight: 650;
+      letter-spacing: -0.02em;
+    }
+
+    .workflow-step p {
+      margin: 0;
+      color: var(--body);
+      font-size: 10px;
+      line-height: 1.7;
+    }
+
+    .tool-name {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .methods-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 12px;
+    }
+
+    .methods-card {
+      padding: 17px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: var(--page);
+    }
+
+    .methods-card h4 {
+      margin-bottom: 8px;
+    }
+
+    .methods-card p {
+      margin-bottom: 0;
+      color: var(--body);
+      font-size: 11px;
+      line-height: 1.75;
+    }
+
+    .research-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .research-bottom > div {
+      padding: 17px;
+      border-radius: 5px;
+      background: var(--accent-soft);
+    }
+
+    .research-bottom h4 {
+      margin-bottom: 6px;
+      color: var(--accent-strong);
+    }
+
+    .research-bottom p {
+      margin: 0;
+      color: var(--body);
+      font-size: 11px;
+      line-height: 1.75;
+    }
+
+    .research-bottom .future {
+      background: var(--surface-soft);
+    }
+
+    .research-bottom .future h4 {
+      color: var(--ink);
+    }
+
+    .candidate-strip {
+      margin-top: 12px;
+      padding: 17px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: var(--surface);
+    }
+
+    .candidate-strip h4 {
+      margin: 0 0 9px;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .candidate-strip p {
+      margin: 0;
+      color: var(--body);
+      font-size: 11px;
+      line-height: 1.75;
+    }
+
+    .gene-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 11px !important;
+    }
+
+    .gene-list span {
+      padding: 4px 7px;
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 9px;
+    }
+
+    .section-top {
+      margin-top: 43px;
+    }
+
+    .publication-card {
+      display: grid;
+      grid-template-columns: 54px 1fr auto;
+      align-items: start;
+      gap: 17px;
+      padding: 23px;
+    }
+
+    .publication-mark {
+      width: 45px;
+      height: 45px;
+      display: grid;
+      place-items: center;
+      border-radius: 6px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .publication-card h3 {
+      margin-bottom: 7px;
+      font-size: 15px;
+      font-weight: 650;
+      letter-spacing: -0.03em;
+    }
+
+    .publication-card p {
+      margin-bottom: 0;
+      color: var(--body);
+      font-size: 12px;
+      line-height: 1.75;
+    }
+
+    .publication-tag {
+      padding: 6px 8px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 9px;
+      white-space: nowrap;
+    }
+
+    .interests-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 13px;
+      margin-top: 14px;
+    }
+
+    .interest-card {
+      min-height: 135px;
+      padding: 19px;
+    }
+
+    .interest-card .card-kicker {
+      margin-bottom: 13px;
+    }
+
+    .interest-card h3 {
+      margin-bottom: 7px;
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .interest-card p {
+      margin-bottom: 0;
+      color: var(--body);
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .leadership-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .leadership-item {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 15px;
+      padding: 19px 21px;
+    }
+
+    .leadership-icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 6px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .leadership-item h3 {
+      margin-bottom: 5px;
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .leadership-item p {
+      margin-bottom: 0;
+      color: var(--body);
+      font-size: 11px;
+      line-height: 1.75;
+    }
+
+    .toolkit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 13px;
+    }
+
+    .toolkit-card {
+      padding: 20px;
+    }
+
+    .toolkit-card h3 {
+      margin-bottom: 14px;
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .chip {
+      padding: 5px 8px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--page);
+      color: var(--body);
+      font-family: var(--mono);
+      font-size: 9px;
+      line-height: 1.4;
+    }
+
+    .experience-grid {
+      margin-top: 20px;
+    }
+
+    .experience-card {
+      padding: 21px;
+    }
+
+    .experience-card h3 {
+      margin-bottom: 5px;
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .experience-card .employer {
+      margin-bottom: 11px;
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .experience-card p:last-child {
+      margin-bottom: 0;
+      color: var(--body);
+      font-size: 11px;
+      line-height: 1.75;
+    }
+
+    .community {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .community li {
+      padding: 8px 11px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--body);
+      font-size: 11px;
+    }
+
+    .contact-section {
+      margin-bottom: 48px;
+      padding: 35px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--ink);
+      color: #f6f8f8;
+    }
+
+    .contact-section .eyebrow {
+      color: #b7dada;
+    }
+
+    .contact-section h2 {
+      margin-bottom: 10px;
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 620;
+      letter-spacing: -0.06em;
+    }
+
+    .contact-section > p:not(.eyebrow) {
+      max-width: 640px;
+      margin-bottom: 20px;
+      color: #c1cbd0;
+      font-size: 13px;
+    }
+
+    .contact-section .button {
+      border-color: #60727a;
+      color: #f6f8f8;
+    }
+
+    .contact-section .button:hover {
+      border-color: #b7dada;
+      color: #b7dada;
+    }
+
+    .site-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding-block: 0 28px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .site-footer p {
+      margin: 0;
+    }
+
+    .footer-name {
+      color: var(--ink);
+      font-weight: 650;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --page: #141b20;
+        --surface: #1b252c;
+        --surface-soft: #222f37;
+        --ink: #e8eef0;
+        --body: #b0bdc3;
+        --muted: #8b9ba3;
+        --line: #34434b;
+        --accent: #8cc8c7;
+        --accent-strong: #a2d9d6;
+        --accent-soft: #243b3d;
+        --warm: #e0a575;
+        --shadow: 0 16px 46px rgb(0 0 0 / 18%);
+      }
+
+      body {
+        background:
+          radial-gradient(ellipse at 85% 5%, rgb(49 86 92 / 24%), transparent 32rem),
+          var(--page);
+      }
+
+      .site-nav .nav-cta {
+        color: var(--ink);
+      }
+
+      .hero-aside {
+        background:
+          linear-gradient(145deg, transparent 38%, rgb(140 200 199 / 9%) 38.2%, transparent 68%),
+          var(--surface);
+      }
+
+      .award {
+        color: var(--warm);
+      }
+
+      .contact-section {
+        background: #0c1216;
+      }
+    }
+
+    @media (max-width: 850px) {
+      .shell {
+        width: min(100% - 40px, 700px);
+      }
+
+      .header-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+        gap: 8px;
+        padding-block: 13px;
+      }
+
+      .site-nav {
+        width: 100%;
+        justify-content: flex-start;
+        gap: clamp(14px, 3vw, 25px);
+        overflow-x: auto;
+        padding: 2px 1px 5px;
+        scrollbar-width: thin;
+      }
+
+      .site-nav a {
+        flex: 0 0 auto;
+      }
+
+      .hero {
+        grid-template-columns: 1fr minmax(220px, 0.7fr);
+        gap: 25px;
+        padding-block: 65px;
+      }
+
+      .hero-aside {
+        min-height: 290px;
+        padding: 19px;
+      }
+
+      .workflow {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .workflow-step {
+        min-height: 175px;
+      }
+
+      .workflow-step:nth-child(2)::after {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      :root {
+        scroll-padding-top: 115px;
+      }
+
+      .shell {
+        width: calc(100% - 34px);
+      }
+
+      .header-inner {
+        gap: 5px;
+      }
+
+      .site-nav {
+        gap: 18px;
+        font-size: 11px;
+      }
+
+      .site-nav .nav-cta {
+        padding: 6px 9px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding-block: 57px 49px;
+      }
+
+      h1 {
+        font-size: clamp(47px, 13vw, 66px);
+      }
+
+      .hero-summary {
+        font-size: 14px;
+      }
+
+      .hero-aside {
+        min-height: 230px;
+      }
+
+      .aside-content {
+        max-width: 280px;
+      }
+
+      .section {
+        padding-block: 59px;
+      }
+
+      .about-grid,
+      .education-grid,
+      .experience-grid,
+      .methods-grid,
+      .research-bottom,
+      .interests-grid,
+      .toolkit-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .research-titlebar {
+        flex-direction: column;
+        padding: 22px 19px;
+      }
+
+      .research-body {
+        padding: 21px 17px;
+      }
+
+      .study-facts {
+        grid-template-columns: 1fr;
+      }
+
+      .workflow-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .workflow {
+        grid-template-columns: 1fr;
+      }
+
+      .workflow-step {
+        min-height: 0;
+      }
+
+      .workflow-step:not(:last-child)::after {
+        top: auto;
+        right: auto;
+        bottom: -12px;
+        left: 28px;
+        width: 1px;
+        height: 13px;
+      }
+
+      .workflow-step:nth-child(2)::after {
+        display: block;
+      }
+
+      .publication-card {
+        grid-template-columns: 45px 1fr;
+        gap: 12px;
+        padding: 18px;
+      }
+
+      .publication-tag {
+        grid-column: 2;
+        justify-self: start;
+      }
+
+      .leadership-item {
+        padding: 16px;
+      }
+
+      .contact-section {
+        margin-bottom: 34px;
+        padding: 25px 21px;
+      }
+
+      .site-footer {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+        padding-bottom: 22px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+
   <header class="site-header">
-    <a class="wordmark" href="index.html" aria-label="Achai home">achai<span>.</span></a>
-    <nav class="site-nav" aria-label="Main navigation">
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="design-tools.html">Design toolkit <span class="nav-arrow" aria-hidden="true">↗</span></a>
-      <a class="nav-contact" href="#contact">Say hello <span aria-hidden="true">↗</span></a>
-    </nav>
+    <div class="shell header-inner">
+      <a class="brand" href="#top" aria-label="Alan Chai, home">
+        Alan Chai
+        <span>Medicine · Genomics</span>
+      </a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#research">Research &amp; Genomics</a>
+        <a href="#publications">Publications &amp; Projects</a>
+        <a href="#leadership">Leadership</a>
+        <a class="nav-cta" href="#contact">Contact / CV</a>
+      </nav>
+    </div>
   </header>
 
   <main id="main">
-    <section class="hero section-wrap" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <p class="eyebrow"><span class="status-dot"></span> A little corner of the internet</p>
-        <h1 id="hero-title">Hi, I’m Achai.<br><span class="headline-accent">Good to see you.</span></h1>
-        <p class="hero-intro">This is my home on the web — a place for the things I’m making, learning, and curious about.</p>
+    <section class="hero shell" id="top" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">MD candidate · Anesthesiology applicant</p>
+        <h1 id="page-title">Alan Chai<span aria-hidden="true">.</span></h1>
+        <p class="hero-role">Medicine, engineering, and computational biology.</p>
+        <p class="hero-summary">I’m an MD candidate at Quinnipiac University’s Frank H. Netter School of Medicine, interested in anesthesiology and the ways rigorous data, thoughtful systems, and hands-on care can improve patient outcomes.</p>
         <div class="hero-actions">
-          <a class="button button-dark" href="#projects">Explore my work <span aria-hidden="true">↓</span></a>
-          <a class="text-link" href="#about">A bit about me <span aria-hidden="true">↘</span></a>
+          <a class="button button-primary" href="#research">Explore my research <span aria-hidden="true">↓</span></a>
+          <a class="button button-quiet" href="#publications">Selected work <span aria-hidden="true">↗</span></a>
         </div>
       </div>
-      <div class="hero-art" aria-hidden="true">
-        <div class="art-orbit orbit-one"></div>
-        <div class="art-orbit orbit-two"></div>
-        <div class="art-sun"></div>
-        <div class="art-card">
-          <span class="art-card-label">CURRENTLY EXPLORING</span>
-          <span class="art-card-title">Ideas into<br>interfaces.</span>
-          <span class="art-card-mark">✳</span>
+      <aside class="hero-aside" aria-label="Academic focus">
+        <span class="aside-label">At the intersection of</span>
+        <div class="aside-content">
+          <span class="aside-symbol" aria-hidden="true">A/G</span>
+          <h2>From genome to bedside.</h2>
+          <p>Clinical medicine, genomic discovery, and the engineering mindset behind reliable systems.</p>
         </div>
-        <span class="art-caption">MADE WITH CURIOSITY&nbsp; · &nbsp;2026</span>
+        <span class="aside-foot">Connect the signal to the person.</span>
+      </aside>
+    </section>
+
+    <section class="section shell" id="about" aria-labelledby="about-title">
+      <header class="section-header">
+        <p class="eyebrow">01 / About</p>
+        <h2 id="about-title">A foundation in systems. A focus on people.</h2>
+        <p>My path to medicine has moved through biochemistry, computational biology, and process engineering. Each has shaped how I approach complex questions: with curiosity, careful measurement, and attention to the people behind the data.</p>
+      </header>
+
+      <div class="about-grid">
+        <article class="card about-card">
+          <h3>Clinical direction</h3>
+          <p>I’m pursuing anesthesiology, drawn to its combination of physiology, procedural skill, real-time decision-making, and team-based care. I’m especially interested in perioperative hemodynamics, point-of-care ultrasound, and the design of safe, effective clinical systems.</p>
+        </article>
+        <article class="card about-card">
+          <h3>Current interests</h3>
+          <ul class="focus-list">
+            <li>Point-of-care ultrasound and hemodynamics</li>
+            <li>Perioperative monitoring and fluid dynamics</li>
+            <li>Clinical simulation and airway ergonomics</li>
+            <li>OR workflow and operational efficiency</li>
+          </ul>
+        </article>
+      </div>
+
+      <h3 class="subsection-title section-top">Education</h3>
+      <div class="education-grid">
+        <article class="card credential-card">
+          <p class="card-kicker">Medical education</p>
+          <h3>Frank H. Netter MD School of Medicine</h3>
+          <p>Quinnipiac University · MD Candidate</p>
+        </article>
+        <article class="card credential-card">
+          <p class="card-kicker">Undergraduate education</p>
+          <h3>University of Massachusetts Amherst</h3>
+          <p>B.S. in Biochemistry &amp; Molecular Biology; minor in Computer Science · Magna Cum Laude</p>
+        </article>
       </div>
     </section>
 
-    <section class="about-section section-wrap" id="about" aria-labelledby="about-title">
-      <div class="section-heading">
-        <p class="eyebrow">01 / A little about me</p>
-        <h2 id="about-title">Always learning.<br>Always making.</h2>
-      </div>
-      <div class="about-copy">
-        <p>I’m interested in the ideas and details that make the web a more useful, thoughtful, and delightful place. This site is where I collect what I’m working on and what I discover along the way.</p>
-        <a class="text-link" href="design-tools.html">See what’s in my design toolkit <span aria-hidden="true">↗</span></a>
-      </div>
-    </section>
+    <section class="section research-section shell" id="research" aria-labelledby="research-title">
+      <header class="section-header">
+        <p class="eyebrow">02 / Research &amp; genomics</p>
+        <h2 id="research-title">Looking beyond the usual variants.</h2>
+        <p>My medical school capstone explores tandem repeat expansions as an underrecognized source of genetic variation in neural tube defects, pairing short-read whole-genome sequencing with locus-level discovery and computational prioritization.</p>
+      </header>
 
-    <section class="projects-section section-wrap" id="projects" aria-labelledby="projects-title">
-      <div class="section-topline">
-        <div>
-          <p class="eyebrow">02 / Selected things</p>
-          <h2 id="projects-title">A work in progress.</h2>
-        </div>
-        <span class="section-note">More projects coming soon <span aria-hidden="true">↗</span></span>
-      </div>
-      <article class="project-card">
-        <div class="project-art" aria-hidden="true">
-          <span class="project-art-shape shape-one"></span>
-          <span class="project-art-shape shape-two"></span>
-          <span class="project-art-type">ideas<br>in bloom<span>.</span></span>
-          <span class="project-art-index">001</span>
-        </div>
-        <div class="project-details">
+      <article class="research-feature" aria-labelledby="str-title">
+        <header class="research-titlebar">
           <div>
-            <p class="project-kicker">A place to begin</p>
-            <h3>This website</h3>
-            <p>A small, ever-evolving space to share projects, notes, and experiments with the world.</p>
+            <p class="eyebrow">Featured capstone · Computational genomics</p>
+            <h3 id="str-title">Exploring the Role of Tandem Repeat Expansions in the Genetic Etiology of Neural Tube Defects</h3>
+            <p>Presented at the American Society of Human Genetics (ASHG) Annual Meeting</p>
           </div>
-          <span class="project-tag">PERSONAL / WEB</span>
+          <span class="award">ASHG<br>Reviewers’ Choice Award</span>
+        </header>
+
+        <div class="research-body">
+          <p class="research-intro">Neural tube defects are complex congenital conditions with genetic contributors that extend beyond canonical single-nucleotide variants. This project investigates non-coding and structural variation by profiling known repeat loci and searching genome-wide for candidate expansions across case-control cohorts.</p>
+
+          <div class="study-facts" aria-label="Study overview">
+            <div class="fact"><strong>Short-read WGS</strong><span>Paired-end sequencing data across case-control cohorts</span></div>
+            <div class="fact"><strong>Two cohorts</strong><span>49 and 67 cases; 53 and 96 controls</span></div>
+            <div class="fact"><strong>Beyond SNVs</strong><span>Known and novel tandem repeat expansion candidates</span></div>
+          </div>
+
+          <div class="workflow-heading">
+            <h4>STR genomic pipeline</h4>
+            <p>PROFILE → DISCOVER → REVIEW → PRIORITIZE</p>
+          </div>
+          <ol class="workflow" aria-label="Short tandem repeat analysis workflow">
+            <li class="workflow-step">
+              <span class="step-index" aria-hidden="true"></span>
+              <h5>Targeted profiling</h5>
+              <span class="tool-name">ExpansionHunter</span>
+              <p>Profiles known pathogenic and polymorphic loci; estimates repeat size, motif interruptions, zygosity, and confidence bounds.</p>
+            </li>
+            <li class="workflow-step">
+              <span class="step-index" aria-hidden="true"></span>
+              <h5>Genome-wide discovery</h5>
+              <span class="tool-name">ExpansionHunter Denovo</span>
+              <p>Finds candidate expansions without predefined loci by examining anchored reads and spanning read pairs for motif outliers.</p>
+            </li>
+            <li class="workflow-step">
+              <span class="step-index" aria-hidden="true"></span>
+              <h5>Read-level review</h5>
+              <span class="tool-name">REviewer</span>
+              <p>Visually validates candidate loci in BAM/CRAM alignments, including read evidence, phasing, and base quality in repetitive regions.</p>
+            </li>
+            <li class="workflow-step">
+              <span class="step-index" aria-hidden="true"></span>
+              <h5>Filter &amp; prioritize</h5>
+              <span class="tool-name">RExPRT · R · HPC</span>
+              <p>Combines genomic quality control, cross-cohort analyses, and SVM/XGBoost pathogenicity prediction to prioritize candidates.</p>
+            </li>
+          </ol>
+
+          <div class="methods-grid">
+            <section class="methods-card" aria-labelledby="automation-title">
+              <h4 id="automation-title">Automation &amp; infrastructure</h4>
+              <p>Built custom Bash and Python pipelines for high-throughput batch execution on high-performance compute clusters, including data normalization, filtering, and cross-cohort statistical association testing.</p>
+            </section>
+            <section class="methods-card" aria-labelledby="interpretation-title">
+              <h4 id="interpretation-title">Interpretation</h4>
+              <p>Candidate loci were evaluated for expansion evidence and predicted pathogenicity, then considered in the context of neural development and biological pathways.</p>
+            </section>
+          </div>
+
+          <div class="research-bottom">
+            <div>
+              <h4>Why it matters</h4>
+              <p>The work supports tandem repeats as a potentially underrecognized class of variation in NTD genetics and motivates deeper study of prioritized loci.</p>
+            </div>
+            <div class="future">
+              <h4>Next questions</h4>
+              <p>Future directions include inheritance analysis in parent-child trios, functional validation, and long-read sequencing to resolve repeat structure.</p>
+            </div>
+          </div>
+          <div class="candidate-strip">
+            <h4>Poster highlights · candidates for follow-up</h4>
+            <p>The poster illustrates IFT88 repeat expansions in approximately 9% of cases and prioritizes candidate genes across cohorts. These are discovery findings for further investigation, not established causal variants.</p>
+            <p class="gene-list" aria-label="Prioritized candidate genes">
+              <span>DIP2C</span><span>MEAK7</span><span>ZNF248</span><span>HECTD4</span><span>IFT88</span>
+              <span>PPP1R13B</span><span>RABEP1</span><span>APCDD1L-DT</span><span>MDGA1</span>
+            </p>
+          </div>
         </div>
       </article>
     </section>
 
-    <section class="contact-section section-wrap" id="contact" aria-labelledby="contact-title">
-      <p class="eyebrow">03 / Your turn</p>
-      <div class="contact-row">
-        <h2 id="contact-title">Have something<br>good in mind?</h2>
-        <a class="button button-light" href="https://github.com/achai9925">Find me on GitHub <span aria-hidden="true">↗</span></a>
+    <section class="section shell" id="publications" aria-labelledby="publications-title">
+      <header class="section-header">
+        <p class="eyebrow">03 / Publications &amp; projects</p>
+        <h2 id="publications-title">Research that connects data to care.</h2>
+        <p>Selected scholarly work and translational questions that shape how I think about medicine.</p>
+      </header>
+
+      <article class="card publication-card">
+        <span class="publication-mark" aria-hidden="true">TBI</span>
+        <div>
+          <p class="card-kicker">Peer-reviewed research</p>
+          <h3>Socioeconomic determinants and long-term recovery after traumatic brain injury</h3>
+          <p>Co-authored research published in <em>Injury</em>, evaluating how socioeconomic determinants of health and area-level income metrics relate to long-term TBI outcomes. Methods included multivariable logistic regression and statistical analysis in R/RStudio.</p>
+        </div>
+        <span class="publication-tag">INJURY</span>
+      </article>
+
+      <div class="interests-grid" aria-label="Clinical and translational interests">
+        <article class="card interest-card">
+          <p class="card-kicker">01 / Point of care</p>
+          <h3>POCUS &amp; hemodynamics</h3>
+          <p>Bedside imaging and physiologic reasoning to understand changing clinical states.</p>
+        </article>
+        <article class="card interest-card">
+          <p class="card-kicker">02 / Perioperative</p>
+          <h3>Monitoring &amp; fluid dynamics</h3>
+          <p>Real-time physiologic monitoring and the systems that support safe anesthesia care.</p>
+        </article>
+        <article class="card interest-card">
+          <p class="card-kicker">03 / Human factors</p>
+          <h3>Simulation &amp; OR design</h3>
+          <p>Airway ergonomics, clinical simulation, and operational efficiency in the operating room.</p>
+        </article>
       </div>
-      <p class="contact-note">I’m always glad to discover what people are making.</p>
+    </section>
+
+    <section class="section shell" id="leadership" aria-labelledby="leadership-title">
+      <header class="section-header">
+        <p class="eyebrow">04 / Leadership &amp; medical education</p>
+        <h2 id="leadership-title">Learning is better when it’s shared.</h2>
+      </header>
+
+      <div class="leadership-list">
+        <article class="card leadership-item">
+          <span class="leadership-icon" aria-hidden="true">AG</span>
+          <div>
+            <h3>Anesthesiology Interest Group · Co-President</h3>
+            <p>Led procedural workshops in endotracheal intubation, bag-mask ventilation, and peripheral nerve block fundamentals, alongside specialty panels for students exploring anesthesiology.</p>
+          </div>
+        </article>
+        <article class="card leadership-item">
+          <span class="leadership-icon" aria-hidden="true">ED</span>
+          <div>
+            <h3>Peer education, mentorship &amp; community care</h3>
+            <p>Facilitated clerkship-transition orientations, served as an admissions interviewer, and volunteered in screenings at Bobcat Free Clinic.</p>
+          </div>
+        </article>
+        <article class="card leadership-item">
+          <span class="leadership-icon" aria-hidden="true">♥</span>
+          <div>
+            <h3>In A Heartbeat · Cardiovascular community health</h3>
+            <p>Supported youth athlete heart screenings by administering community 12-lead EKGs and helping train volunteers.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section shell" aria-labelledby="toolkit-title">
+      <header class="section-header">
+        <p class="eyebrow">05 / Technical toolkit</p>
+        <h2 id="toolkit-title">Tools for asking better questions.</h2>
+      </header>
+
+      <div class="toolkit-grid">
+        <article class="card toolkit-card">
+          <h3>Languages &amp; frameworks</h3>
+          <div class="chips">
+            <span class="chip">R</span><span class="chip">Python</span><span class="chip">Bash / Shell</span>
+            <span class="chip">LaTeX</span><span class="chip">Next.js</span><span class="chip">HTML / CSS</span>
+          </div>
+        </article>
+        <article class="card toolkit-card">
+          <h3>Genomics &amp; data</h3>
+          <div class="chips">
+            <span class="chip">ExpansionHunter</span><span class="chip">ExpansionHunter Denovo</span>
+            <span class="chip">REviewer</span><span class="chip">SAMtools / BCFtools</span>
+            <span class="chip">RStudio</span><span class="chip">tidyverse</span><span class="chip">ggplot2</span><span class="chip">stats</span>
+          </div>
+        </article>
+        <article class="card toolkit-card">
+          <h3>Laboratory &amp; engineering</h3>
+          <div class="chips">
+            <span class="chip">Membrane chromatography</span><span class="chip">Bioprocess scale-up</span>
+            <span class="chip">Automation liquid handling</span>
+          </div>
+        </article>
+      </div>
+
+      <h3 class="subsection-title section-top">Previous professional experience</h3>
+      <div class="experience-grid">
+        <article class="card experience-card">
+          <p class="card-kicker">Process engineering</p>
+          <h3>Chemical Engineer</h3>
+          <p class="employer">MilliporeSigma</p>
+          <p>Worked in downstream processing with a focus on membrane chromatography technology.</p>
+        </article>
+        <article class="card experience-card">
+          <p class="card-kicker">Genomics &amp; automation</p>
+          <h3>Process Development Technician</h3>
+          <p class="employer">Broad Institute of MIT and Harvard</p>
+          <p>Supported genomic workflows and automation pipelines in a process development setting.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section shell" aria-labelledby="community-title">
+      <header class="section-header">
+        <p class="eyebrow">06 / Outside the lab &amp; clinic</p>
+        <h2 id="community-title">A few things I enjoy.</h2>
+      </header>
+      <ul class="community">
+        <li>Chinese yo-yo (diabolo) choreography &amp; instruction</li>
+        <li>Rock climbing</li>
+        <li>Skiing</li>
+        <li>Leisure piano</li>
+      </ul>
+    </section>
+
+    <section class="contact-section shell" id="contact" aria-labelledby="contact-title">
+      <p class="eyebrow">Get in touch</p>
+      <h2 id="contact-title">Let’s connect.</h2>
+      <p>Thanks for your interest in my work. Visit my public GitHub profile to explore my projects and connect.</p>
+      <a class="button" href="https://github.com/achai9925" target="_blank" rel="noopener noreferrer">Visit GitHub profile <span aria-hidden="true">↗</span></a>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <a class="wordmark footer-wordmark" href="index.html">achai<span>.</span></a>
-    <p>Made with curiosity. © 2026</p>
-    <a class="footer-link" href="design-tools.html">Explore the design toolkit <span aria-hidden="true">↗</span></a>
+  <footer class="site-footer shell">
+    <p class="footer-name">Alan Chai · MD Candidate</p>
+    <p>Medicine · Genomics · Engineering</p>
+    <p>© <time datetime="2026">2026</time></p>
   </footer>
 </body>
 </html>
