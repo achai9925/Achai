@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interactive educational operating room setup simulation for a routine laparoscopic appendectomy.">
+  <meta name="theme-color" content="#e8edf2">
+  <title>OR Setup Simulation — Laparoscopic Appendectomy</title>
+  <link rel="stylesheet" href="or-simulation.css">
+  <script src="or-simulation.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#simulation">Skip to simulation</a>
+  <main id="simulation" class="simulation-shell">
+    <header class="simulation-header">
+      <a class="back-home" href="index.html" aria-label="Back to Alan Chai's home">← <span>Alan Chai</span></a>
+      <div class="case-heading">
+        <span class="eyebrow">Clinical skills lab · Interactive learning</span>
+        <h1>OR setup <span>/</span> Laparoscopic appendectomy</h1>
+      </div>
+      <p class="simulation-status"><span class="status-light"></span> SIMULATION MODE</p>
+    </header>
+
+    <div class="safety-note" role="note">
+      <strong>Educational simulation only.</strong> This simplified interface is not a clinical device, checklist, or source of patient-care instructions. Medication controls prepare labeled mock items only; no doses are provided.
+    </div>
+
+    <div class="room-grid">
+      <pyxis-station class="panel pyxis-panel">
+        <section class="equipment">
+          <header class="panel-heading">
+            <div>
+              <p class="eyebrow">Medication station</p>
+              <h2>Pyxis <span class="station-id">SIM-01</span></h2>
+            </div>
+            <span class="lock-indicator" data-lock-indicator>LOCKED</span>
+          </header>
+          <div class="pyxis-screen">
+            <div class="screen-topline"><span>SECURE DISPENSING</span><span>● MOCK</span></div>
+            <div class="screen-content">
+              <span class="screen-icon" aria-hidden="true">✳</span>
+              <strong data-auth-title>Station locked</strong>
+              <span data-auth-copy>Authenticate to open medication drawers.</span>
+              <button class="button button-screen" type="button" data-authenticate>Mock sign in</button>
+            </div>
+            <div class="screen-bottom">TRAINING ENVIRONMENT · NO PATIENT DATA</div>
+          </div>
+          <div class="drawer-bank" data-drawer-bank aria-label="Medication drawers">
+            <p class="eyebrow">Medication drawers</p>
+            <button class="drawer-button" type="button" data-category="induction" disabled><span>01</span> Induction</button>
+            <button class="drawer-button" type="button" data-category="paralytic" disabled><span>02</span> Neuromuscular blockers</button>
+            <button class="drawer-button" type="button" data-category="adjunct" disabled><span>03</span> Adjuncts</button>
+            <button class="drawer-button" type="button" data-category="reversal" disabled><span>04</span> Reversal</button>
+          </div>
+          <section class="medication-selection" aria-live="polite">
+            <div class="drawer-title">
+              <div><p class="eyebrow" data-drawer-kicker>Select a drawer</p><h3 data-drawer-title>Locked cabinet</h3></div>
+              <span class="selection-count" data-selection-count>0 selected</span>
+            </div>
+            <p class="drawer-message" data-drawer-message>Authenticate to browse mock medication labels.</p>
+            <div class="medication-list" data-medication-list></div>
+            <button class="button button-prepare" type="button" data-prepare disabled>Prepare selected</button>
+          </section>
+          <section class="prepared-section">
+            <div class="prepared-heading"><h3>Prepared items</h3><span data-prepared-count>0</span></div>
+            <p class="prepared-hint" data-prepared-hint>Draw up a mock medication to add it here.</p>
+            <div class="prepared-list" data-prepared-list></div>
+          </section>
+        </section>
+      </pyxis-station>
+
+      <operating-bed class="panel bed-panel">
+        <section class="equipment">
+          <header class="panel-heading">
+            <div>
+              <p class="eyebrow">Patient zone</p>
+              <h2>Operating table</h2>
+            </div>
+            <span class="patient-state" data-patient-state>ROOM READY</span>
+          </header>
+          <div class="room-view">
+            <div class="surgical-lamp" aria-hidden="true"><span></span><i></i></div>
+            <div class="table-rail table-rail-top" aria-hidden="true"></div>
+            <div class="table-surface">
+              <div class="table-pad"></div>
+              <patient-canvas class="patient-canvas">
+                <div class="empty-patient" data-empty-patient>
+                  <span class="empty-symbol" aria-hidden="true">＋</span>
+                  <strong>Room ready</strong>
+                  <span>Bring the patient into the OR to begin monitor placement.</span>
+                </div>
+                <div class="patient-figure" data-patient-figure hidden aria-label="Supine patient mannequin">
+                  <div class="patient-head" aria-hidden="true"><span class="head-cap"></span><span class="head-face"></span></div>
+                  <div class="patient-neck" aria-hidden="true"></div>
+                  <div class="patient-body" aria-hidden="true">
+                    <span class="patient-gown"></span>
+                    <span class="patient-mark mark-chest" data-mark="chest"></span>
+                    <span class="patient-mark mark-airway" data-mark="airway"></span>
+                    <span class="patient-mark mark-arm" data-mark="arm"></span>
+                  </div>
+                  <div class="patient-arm arm-left" aria-hidden="true"><span class="patient-hand" data-mark="finger"></span></div>
+                  <div class="patient-arm arm-right" aria-hidden="true"><span class="patient-hand"></span></div>
+                  <div class="patient-leg leg-left" aria-hidden="true"></div>
+                  <div class="patient-leg leg-right" aria-hidden="true"></div>
+                  <svg class="wire-overlay" viewBox="0 0 420 185" preserveAspectRatio="none" aria-hidden="true">
+                    <path data-wire="ecg" d="M190 75 C220 74 220 139 276 135 S350 144 419 119"></path>
+                    <path data-wire="spo2" d="M364 14 C335 21 344 113 305 132 S365 148 419 128"></path>
+                    <path data-wire="nibp" d="M268 12 C285 28 300 45 313 116 S375 139 419 135"></path>
+                    <path data-wire="etco2" d="M48 16 C76 42 99 8 120 45 S192 106 256 129 S365 145 419 141"></path>
+                  </svg>
+                  <button class="drop-zone zone-chest" type="button" data-zone="ecg" aria-label="Drop ECG leads on chest" disabled><span>CHEST</span></button>
+                  <button class="drop-zone zone-finger" type="button" data-zone="spo2" aria-label="Drop pulse oximeter on index finger" disabled><span>FINGER</span></button>
+                  <button class="drop-zone zone-arm" type="button" data-zone="nibp" aria-label="Drop NIBP cuff on upper arm" disabled><span>UPPER ARM</span></button>
+                  <button class="drop-zone zone-airway" type="button" data-zone="etco2" aria-label="Drop EtCO2 sample line at airway" disabled><span>AIRWAY</span></button>
+                </div>
+              </patient-canvas>
+              <div class="table-side-rail" aria-hidden="true"></div>
+              <div class="supply-tray" data-med-tray data-drop-target="medications" aria-label="Medication tray drop target">
+                <span class="tray-icon" aria-hidden="true">▱</span>
+                <strong>Medication tray</strong>
+                <span>Drop prepared mock items here</span>
+                <div class="tray-items" data-tray-items></div>
+              </div>
+            </div>
+            <div class="table-rail table-rail-bottom" aria-hidden="true"></div>
+          </div>
+          <div class="bed-controls">
+            <div class="patient-copy"><strong data-bed-title>Patient not yet in room</strong><span data-bed-copy>Set up the room before starting the case.</span></div>
+            <button class="button button-bring-patient" type="button" data-bring-patient>Bring Patient to OR</button>
+          </div>
+          <div class="attachment-guide">
+            <span>Place each sensor on its matching highlighted area.</span>
+            <button class="button button-reset" type="button" data-reset>Reset simulation</button>
+          </div>
+          <p class="interaction-hint" data-interaction-hint aria-live="polite">Bring the patient to the room to enable placement targets.</p>
+        </section>
+      </operating-bed>
+
+      <anesthesia-monitor class="panel monitor-panel">
+        <section class="equipment">
+          <header class="panel-heading monitor-heading">
+            <div><p class="eyebrow">Anesthesia workstation</p><h2>Patient monitor</h2></div>
+            <span class="monitor-clock" data-clock>--:--:--</span>
+          </header>
+          <div class="monitor-bezel">
+            <div class="monitor-topbar"><span>OR 03</span><span>ADULT · STANDARD</span><span data-monitor-state>STANDBY</span></div>
+            <div class="monitor-screen">
+              <div class="parameter-row parameter-ecg" data-parameter="ecg">
+                <div class="wave-column"><div class="wave-label">II <span>ECG</span></div><waveform-canvas class="waveform" data-waveform="ecg"><canvas aria-label="ECG waveform"></canvas></waveform-canvas><div class="wave-status" data-sensor-status="ecg">NO SENSOR</div></div>
+                <div class="numeric-value"><strong data-reading="hr">--</strong><span>HR <small>bpm</small></span></div>
+              </div>
+              <div class="parameter-row parameter-spo2" data-parameter="spo2">
+                <div class="wave-column"><div class="wave-label">PLETH <span>SpO₂</span></div><waveform-canvas class="waveform" data-waveform="spo2"><canvas aria-label="Pulse oximetry waveform"></canvas></waveform-canvas><div class="wave-status" data-sensor-status="spo2">DISCONNECTED</div></div>
+                <div class="numeric-value"><strong data-reading="spo2">--</strong><span>SpO₂ <small>%</small></span></div>
+              </div>
+              <div class="parameter-row parameter-nibp" data-parameter="nibp">
+                <div class="wave-column nibp-copy"><div class="wave-label">NIBP <span>CUFF</span></div><div class="nibp-status" data-sensor-status="nibp">NO SENSOR</div><div class="nibp-cycle" data-nibp-cycle hidden><span></span> Cycling cuff…</div></div>
+                <div class="numeric-value"><strong data-reading="nibp">--/--</strong><span>mmHg <small>(MAP --)</small></span><button type="button" class="cycle-button" data-cycle disabled>Start cycle</button></div>
+              </div>
+              <div class="parameter-row parameter-etco2" data-parameter="etco2">
+                <div class="wave-column"><div class="wave-label">CO₂ <span>CAPNOGRAPHY</span></div><waveform-canvas class="waveform" data-waveform="etco2"><canvas aria-label="Capnography waveform"></canvas></waveform-canvas><div class="wave-status" data-sensor-status="etco2">NO SAMPLE LINE</div></div>
+                <div class="numeric-value"><strong data-reading="etco2">--</strong><span>EtCO₂ <small>mmHg</small></span><span class="rr-label">RR <b data-reading="rr">--</b></span></div>
+              </div>
+            </div>
+            <div class="monitor-footer"><span>SIMULATION ONLY</span><span>ALARM LIMITS: DEMO</span></div>
+          </div>
+          <section class="sensor-console">
+            <div class="console-heading"><h3>Monitor cables</h3><span>DRAG TO PATIENT</span></div>
+            <p class="sensor-instruction">Drag a cable to its matching body zone, or select a cable and tap a zone.</p>
+            <div class="sensor-list">
+              <button class="sensor-handle sensor-ecg" type="button" draggable="true" data-sensor="ecg" aria-pressed="false"><span class="sensor-dot"></span><span><strong>ECG leads</strong><small>Green · white · black · red</small></span><span class="sensor-state" data-cable-state="ecg">Connect</span></button>
+              <button class="sensor-handle sensor-spo2" type="button" draggable="true" data-sensor="spo2" aria-pressed="false"><span class="sensor-dot"></span><span><strong>Pulse oximeter</strong><small>Blue · index finger</small></span><span class="sensor-state" data-cable-state="spo2">Connect</span></button>
+              <button class="sensor-handle sensor-nibp" type="button" draggable="true" data-sensor="nibp" aria-pressed="false"><span class="sensor-dot"></span><span><strong>NIBP cuff</strong><small>Arm · automatic cycle</small></span><span class="sensor-state" data-cable-state="nibp">Connect</span></button>
+              <button class="sensor-handle sensor-etco2" type="button" draggable="true" data-sensor="etco2" aria-pressed="false"><span class="sensor-dot"></span><span><strong>EtCO₂ line</strong><small>Yellow · airway</small></span><span class="sensor-state" data-cable-state="etco2">Connect</span></button>
+            </div>
+          </section>
+        </section>
+      </anesthesia-monitor>
+    </div>
+    <footer class="simulation-footer"><span>Educational simulation · Not for clinical use</span><a href="index.html">← Return to home</a></footer>
+  </main>
+</body>
+</html>
